@@ -1,6 +1,10 @@
-m_files_path = ""
+# -*- coding:utf-8 -*-
 
-txt_files_path = ""
+txt_files_path = "D:\\multi_agent\\txt_files"
+
+
+m_files_path = "D:\\multi_agent\\m_files"
+
 
 matlab_code1 = """
 function out = model
@@ -9,10 +13,6 @@ import com.comsol.model.*
 import com.comsol.model.util.*
 
 model = ModelUtil.create('Model');
-
-model.modelPath('C:\Users\kkkw\Desktop');
-
-model.label('test_txt.mph');
 
 model.component.create('comp1', true);
 
@@ -131,8 +131,36 @@ model.result('pg2').feature('con1').set('smooth', 'internal');
 model.result('pg2').feature('con1').set('resolution', 'normal');
 model.result.export('data1').set('expr', {'comp1.ht.ins1.Tave'});
 model.result.export('data1').set('descr', {[native2unicode(hex2dec({'52' 'a0'}), 'unicode')  native2unicode(hex2dec({'67' '43'}), 'unicode')  native2unicode(hex2dec({'5e' '73'}), 'unicode')  native2unicode(hex2dec({'57' '47'}), 'unicode')  native2unicode(hex2dec({'6e' '29'}), 'unicode')  native2unicode(hex2dec({'5e' 'a6'}), 'unicode') ]});
-model.result.export('data1').set('filename', 'xxxxxxxxxxxx');
+model.result.export('data1').set('filename', 'xxxxxxxxxxxx.txt');
 model.result.export('data1').run;
 
 out = model;
+"""
+
+
+attribute = {
+    '左基板温度':None,
+    '右基板温度':None,
+    '左基板接触角':None,
+    '右基板接触角':None,
+    '表面张力':None,
+    '左基板密度':None,
+    '右基板密度':None,
+    '左基板恒压热容':None,
+    '右基板恒压热容':None,
+    '液滴密度':None,
+    '动力黏度':None,
+    '左基板导热系数':None,
+    '右基板导热系数':None
+}
+
+
+m_run_m  = """
+Currentdir=pwd;
+cd("D:\\Program Files\\COMSOL\\COMSOL61\\Multiphysics\\bin\\win64\\");
+system('comsolmphserver.exe &');
+cd('D:\\Program Files\\COMSOL\\COMSOL61\\Multiphysics\\mli');
+mphstart(2036);
+cd(Currentdir);
+run("xxxxxxxx.m")
 """
